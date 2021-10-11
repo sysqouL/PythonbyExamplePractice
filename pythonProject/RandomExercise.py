@@ -75,7 +75,7 @@ while correct == False:
 
 
 # ----------------------------------------------
-""" 
+"""
 # 57 Exercise
 import random
 num = random.randint(1, 10)
@@ -86,7 +86,7 @@ while correct == False:
     if chislo == num:
         correct = True
         print("Вы угадали число !!!")
-    elif chislo > num
+    elif chislo > num:
         print("Слишком много")
     else:
         print("Слишком мало")
@@ -95,8 +95,8 @@ while correct == False:
 
 
 # ----------------------------------------------
-
-
+""" 
+# 58 Exercise
 import random
 score = 0
 for i in range(1, 6):
@@ -108,3 +108,32 @@ for i in range(1, 6):
     if answer == correct:
         score = score + 1
 print("Количество баллов - ", score)
+"""
+# ----------------------------------------------
+
+# ----------------------------------------------
+""" 
+# 59 Exercise
+import random
+
+colour = random.choice(["красный","жёлтый","зелёный","синий","белый"])
+correct = True
+while correct == True:
+    yourcolour = input("Выберите цвет - красный,жёлтый,зелёный,синий или белый: ")
+    yourcolour = yourcolour.lower()
+    if yourcolour == colour:
+        print("Ваш выбор совпал")
+        break
+    else:
+        if colour == "красный":
+            print("Запрещающий сигнал светофора")
+        elif colour == "жёлтый":
+            print("Лимон - ")
+        elif colour == "зелёный":
+            print("Огурец - ")
+        elif colour == "белый":
+            print("Молоко - ")
+        elif colour == "синий":
+            print("Стержень ручки - ")
+# ----------------------------------------------
+"""

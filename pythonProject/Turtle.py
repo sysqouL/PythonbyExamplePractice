@@ -118,3 +118,50 @@ turtle.end_fill()
 turtle.exitonclick()
 """
 # ---------------------------------------
+
+
+# ---------------------------------------
+"""
+# 65 Exercise Цифры 1 2 3
+
+import turtle
+turtle.left(90)
+turtle.forward(100)
+turtle.left(150)
+turtle.forward(50)
+turtle.right(180)
+turtle.forward(50)
+turtle.right(60)
+turtle.penup()
+turtle.forward(70)
+
+turtle.pendown()
+turtle.forward(70)
+turtle.right(90)
+turtle.forward(50)
+turtle.right(90)
+turtle.forward(70)
+turtle.left(90)
+turtle.forward(50)
+turtle.left(90)
+turtle.forward(70)
+turtle.penup()
+turtle.forward(70)
+
+turtle.pendown()
+turtle.forward(70)
+turtle.left(90)
+turtle.forward(50)
+turtle.left(90)
+turtle.forward(45)
+turtle.right(180)
+turtle.forward(45)
+turtle.left(90)
+turtle.forward(50)
+turtle.left(90)
+turtle.forward(70)
+turtle.penup()
+turtle.forward(400)
+turtle.exitonclick()
+"""
+# ---------------------------------------

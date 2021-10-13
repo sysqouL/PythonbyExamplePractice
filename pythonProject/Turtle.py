@@ -165,3 +165,56 @@ turtle.forward(400)
 turtle.exitonclick()
 """
 # ---------------------------------------
+
+
+# ---------------------------------------
+"""
+# 66 Exercise Восьмиугольник
+import turtle
+import random
+
+turtle.pensize(10)
+for i in range (0, 8):
+    turtle.color(random.choice(["red","blue","green","yellow","violet","black"]))
+    turtle.left(90)
+    turtle.forward(80)
+    turtle.right(45)
+turtle.exitonclick()
+"""
+# ---------------------------------------
+
+
+# ---------------------------------------
+"""
+# 67 Exercise Фигура
+import turtle
+import random
+
+turtle.pensize(3)
+for i in range(0, 12):
+    for i in range(0, 8):
+        turtle.forward(40)
+        turtle.right(45)
+    turtle.right(30)
+turtle.exitonclick()
+"""
+# ---------------------------------------
+
+
+# ---------------------------------------
+# 68 Exercise Random
+"""
+import turtle
+import random
+
+turtle.pensize(4)
+num1 = random.randint(0, 50)
+turtle.screensize(2000, 1500)
+for i in range(0, num1):
+    dlina = random.randint(10, 300)
+    ygol = random.randint(5, 180)
+    turtle.forward(dlina)
+    turtle.right(ygol)
+
+turtle.exitonclick()
+"""

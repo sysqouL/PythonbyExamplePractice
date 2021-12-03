@@ -107,6 +107,7 @@ window.mainloop()
 """
 # ---------------------------------------
 
+
 # ---------------------------------------
 """
 #126 накопление/обнуление суммы
@@ -159,8 +160,9 @@ window.mainloop()
 """
 # ---------------------------------------
 
-# ---------------------------------------
 
+# ---------------------------------------
+"""
 #127 Список имен с использованием tkinter
 
 from tkinter import *
@@ -213,3 +215,250 @@ button_clear_list["bg"] = "white"
 button_clear_list["fg"] = "black"
 
 window.mainloop()
+"""
+# ---------------------------------------
+
+
+# ---------------------------------------
+"""
+#128 Преобразование расстояния с использованием tkinter
+
+from tkinter import *
+import math
+
+def Km_to_mil():
+    rast = text_entry_rast.get()
+    rast = int(rast)
+    rast_to_mil = round(rast * 0.6214, 4)
+    text_out_result["text"] = str(rast_to_mil) + " миль"
+
+def Mil_to_km():
+    rast = text_entry_rast.get()
+    rast = int(rast)
+    rast_to_km = round(rast * 1.6093, 4)
+    text_out_result["text"] = str(rast_to_km) + " километров"
+
+window = Tk()
+window.title("Перевод расстояния")
+window.geometry("600x300")
+
+label_rast = Label(text = " Введите расстояние: ")
+label_rast.place(x = 30,y = 30, width = 180)
+label_rast["relief"] = "ridge"
+label_rast["bg"] = "white"
+label_rast["fg"] = "black"
+
+label_info = Label(text = " 1 километр = 0,6214 мили \n" "1 миля = 1,6093 километра")
+label_info.place(x = 30, y = 60, width = 180)
+label_info["relief"] = "ridge"
+label_info["bg"] = "white"
+label_info["fg"] = "black"
+
+text_entry_rast = Entry(text = 0)
+text_entry_rast.place(x = 230,y = 31, width = 140, height = 20)
+text_entry_rast.focus()
+text_entry_rast["justify"] = "center"
+text_entry_rast["fg"] = "black"
+
+button_to_km = Button(text = "Перевести километры в мили", command = Km_to_mil)
+button_to_km.place(x = 30,y = 120, width = 180, heigh = 22)
+button_to_km["relief"] = "raised"
+button_to_km["bg"] = "white"
+button_to_km["fg"] = "black"
+
+button_to_mil = Button(text = "Перевести мили в километры", command = Mil_to_km)
+button_to_mil.place(x = 30,y = 150, width = 180, heigh = 22)
+button_to_mil["relief"] = "raised"
+button_to_mil["bg"] = "white"
+button_to_mil["fg"] = "black"
+
+text_out_result = Message(text = 0)
+text_out_result.place(x = 230,y = 121, width = 140, height = 51)
+text_out_result["justify"] = "center"
+text_out_result["relief"] = "sunken"
+text_out_result["fg"] = "black"
+text_out_result["bg"] = "white"
+
+window.mainloop()
+"""
+# ---------------------------------------
+
+
+# ---------------------------------------
+"""
+#129-130 Список с целыми числами, с использованием tkinter. Сохранение в .csv
+
+from tkinter import *
+import csv
+
+def Num_check():
+    num = text_entry_num.get()
+    if num.isdigit():
+        text_out_list.insert(END, num)
+        text_entry_num.delete(0,END)
+        text_entry_num.focus()
+    else:
+        text_entry_num.delete(0,END)
+        text_entry_num.focus()
+
+def Save_to_csv():
+    file = open("ListNumbers_130.csv", "w")
+    elem = 0
+    tmp_list = text_out_list.get(0, END)
+    for i in tmp_list:
+        new_record = tmp_list[elem] + "\n"
+        file.write(str(new_record))
+        elem = elem + 1
+    file.close()
+
+def Clear_List():
+    text_out_list.delete(0,END)
+    text_entry_num.focus()
+
+
+window = Tk()
+window.title("Проверка чисел")
+window.geometry("600x400")
+
+label_info = Label(text = " Введите число: ")
+label_info.place(x = 30,y = 30, width = 180)
+label_info["relief"] = "ridge"
+label_info["bg"] = "white"
+label_info["fg"] = "black"
+
+text_entry_num = Entry(text = 0)
+text_entry_num.place(x = 230,y = 31, width = 140, height = 20)
+text_entry_num.focus()
+text_entry_num["justify"] = "center"
+text_entry_num["fg"] = "black"
+
+button_num_check = Button(text = "Проверка, является ли \n число целым", command = Num_check )
+button_num_check.place(x = 30,y = 90, width = 180, heigh = 35)
+button_num_check["relief"] = "solid"
+button_num_check["bg"] = "white"
+button_num_check["fg"] = "black"
+
+text_out_list = Listbox()
+text_out_list.place(x = 230,y = 90, width = 140, height = 180)
+text_out_list["bg"] = "white"
+text_out_list["fg"] = "black"
+text_out_list["justify"] = "center"
+text_out_list["relief"] = "groove"
+
+button_save_csv = Button(text = "Сохранить в .csv", command = Save_to_csv )
+button_save_csv .place(x = 410,y = 200, width = 140, heigh = 22)
+button_save_csv ["relief"] = "solid"
+button_save_csv ["bg"] = "white"
+button_save_csv ["fg"] = "black"
+
+button_clear_list = Button(text = "ОЧИСТИТЬ СПИСОК", command = Clear_List )
+button_clear_list.place(x = 410,y = 250, width = 140, heigh = 22)
+button_clear_list["relief"] = "solid"
+button_clear_list["bg"] = "white"
+button_clear_list["fg"] = "black"
+
+window.mainloop()
+"""
+# ---------------------------------------
+
+
+# ---------------------------------------
+"""
+#131-132 Работа с .csv, с использованием tkinter, вывод списка
+
+from tkinter import *
+import csv
+
+def Create_csv():
+    file = open("Ages_131.csv", "w")
+    file.close()
+
+def Disp_csv():
+    file = list(csv.reader(open("Ages_131.csv")))
+    x = 0
+    disp_list = []
+    for row in file:
+        disp_list.append(row)
+    for i in disp_list:
+        elem = disp_list[x]
+        text_out_list.insert(END, elem)
+        x = x + 1
+
+def Clear_list():
+    text_out_list.delete(0, END)
+    text_entry_name.focus()
+
+def Save_to_csv():
+    file = open("Ages_131.csv", "a")
+    name = text_entry_name.get()
+    age = text_entry_age.get()
+    new_record = "Имя - " + name + ". Возраст - " + age + "\n"
+    file.write(str(new_record))
+    file.close()
+    text_entry_name.delete(0, END)
+    text_entry_age.delete(0, END)
+    text_entry_name.focus()
+
+window = Tk()
+window.title("Работа с CSV")
+window.geometry("600x400")
+
+label_name = Label(text = " Введите имя: ")
+label_name.place(x = 30,y = 30, width = 120)
+label_name["relief"] = "ridge"
+label_name["bg"] = "white"
+label_name["fg"] = "black"
+
+text_entry_name = Entry(text = " ")
+text_entry_name.place(x = 230,y = 30, width = 160, height = 20)
+text_entry_name.focus()
+text_entry_name["justify"] = "center"
+text_entry_name["fg"] = "black"
+
+label_age = Label(text = " Введите возраст: ")
+label_age.place(x = 30,y = 60, width = 120)
+label_age["relief"] = "ridge"
+label_age["bg"] = "white"
+label_age["fg"] = "black"
+
+text_entry_age = Entry(text = 0)
+text_entry_age.place(x = 230,y = 60, width = 160, height = 20)
+text_entry_age.focus()
+text_entry_age["justify"] = "center"
+text_entry_age["fg"] = "black"
+
+text_out_list = Listbox()
+text_out_list.place(x = 230,y = 90, width = 200, height = 180)
+text_out_list["bg"] = "white"
+text_out_list["fg"] = "black"
+text_out_list["justify"] = "center"
+text_out_list["relief"] = "groove"
+
+button_create_csv = Button(text = "Создать новый .csv файл", command = Create_csv )
+button_create_csv.place(x = 30,y = 100, width = 180, heigh = 35)
+button_create_csv["relief"] = "solid"
+button_create_csv["bg"] = "white"
+button_create_csv["fg"] = "black"
+
+button_save_csv = Button(text = "Сохранить в .csv", command = Save_to_csv )
+button_save_csv .place(x = 30,y = 150, width = 180, heigh = 35)
+button_save_csv["relief"] = "solid"
+button_save_csv["bg"] = "white"
+button_save_csv["fg"] = "black"
+
+button_disp_csv = Button(text = "Отобразить содержимое \n файла", command = Disp_csv )
+button_disp_csv.place(x = 30,y = 200, width = 180, heigh = 35)
+button_disp_csv["relief"] = "solid"
+button_disp_csv["bg"] = "white"
+button_disp_csv["fg"] = "black"
+
+button_clear_list = Button(text = "Очистить список", command = Clear_list )
+button_clear_list.place(x = 30,y = 250, width = 180, heigh = 22)
+button_clear_list["relief"] = "solid"
+button_clear_list["bg"] = "white"
+button_clear_list["fg"] = "black"
+
+window.mainloop()
+"""
+# ---------------------------------------
+

@@ -25,15 +25,49 @@
     list_box = Listbox()                    -   создает раскрывающийся список, содержащий только строки
     entry_box ["justify"] = "center"        -   режим выравнивания текста в поле (не работает для областей вывода данных)
     
-    button1 = Button(text = "Click here", command = click)  -  создается кнопка для запуска подпрограммы click
+    button1 = Button(text = "Click here", command = click)          -  создается кнопка для запуска подпрограммы click
     
-    label.place(x = 50, y = 20, width = 100, height = 25)  -  задается расположение объекта в окне
-    entry_box.delete(0, END)                -   удаляет содержимое отдельного эл-та или всего списка
-    num = entry_box.get()                   -   сохраняет содержимое поля ввода текста в переменную (не работает для областей вывода данных) 
-    answer = output_txt["text"]             -   сохраняет содержимое области вывода в переменной (не работает для полей текстового ввода)
-    output_txt["text"] = total              -   изменяет содержимое области вывода данных для отображеня значения переменной
+    label.place(x = 50, y = 20, width = 100, height = 25)           -  задается расположение объекта в окне
+    entry_box.delete(0, END)                                        -   удаляет содержимое отдельного эл-та или всего списка
+    num = entry_box.get()                                           -   сохраняет содержимое поля ввода текста в переменную (не работает для областей вывода данных) 
+    answer = output_txt["text"]                                     -   сохраняет содержимое области вывода в переменной (не работает для полей текстового ввода)
+    output_txt["text"] = total                                      -   изменяет содержимое области вывода данных для отображеня значения переменной
     
-    window.mainloop()                       -   завершающая команда
+    
+    window.mainloop()                                               -   завершающая команда
+    
+    
+    window.wm_iconbitmap("MyIcon.ico")                              -   изменение значка в заголовке окна
+    window.configure(background = "light gree")                     -   изменяет цвет фона окна
+    
+    logo = PhotoImage(file = "logo.gif")                            -   выводим изображение в Label. Неизменяется во время выполнения программы 
+    logoimage = Label(image = logo)
+    logoimage.place(x = ,y = ,width = , height = )
+    
+    photo = PhotoImage(file = "logo.gif")                           -   выводим изображение в Label. Изменяется благодаря 3 строчке
+    photobox = Label(window, image = photo)
+    photobox.image = photo
+    photobox.place(x,y,width,height)
+    
+    selectName = StringVar(window)                                  -   с переменной selectName связывается строка "Select Name", затем создается раскрывающийся список
+    selectName.set("Select Name")                                       в котором отображается значения из переменной selectName и добавляются значения из списка namesList 
+    namesList = OptionMenu(window, SelectName, "Petya", "Katya")
+    nameList.place(x,y,width,height)
+    
+    
+    def clicked ():                                                 -   при нажатии кнопки выполняется подпрограмма clicked(). Получаем значение из переменной selectName и создается сообщение
+        sel = selectName.get()                                          Затем проверяется какой вариант выбран (Петя, Катя и тд) и отображается при помощи переменной photo
+        mesg = "Hello " + sel
+        mlabel["text"] = mesg
+        if sel == "Petya":
+            photo = PhotoImage(file = "Petya.gif")
+            photobox.image = photo
+        elif sel == "Katya":
+            photo = PhotoImage(file = "Katya.gif")
+            photobox.image = photo
+        else:
+            photo = PhotoImage(file = "Name.gif")
+            photobox.image = photo            
 """
 
 

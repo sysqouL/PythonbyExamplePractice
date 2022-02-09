@@ -1,0 +1,9 @@
+SW1:
+  Eth 0/1:
+    Eth 0/0: R1
+  Eth 0/2:
+    Eth 0/0: R2
+  Eth 0/3:
+    Eth 0/0: R3
+  Eth 0/4:
+    Eth 0/0: R4

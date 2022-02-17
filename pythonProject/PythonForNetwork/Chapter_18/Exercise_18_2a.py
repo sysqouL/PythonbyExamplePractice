@@ -22,7 +22,7 @@ def send_config_commands(device, commands, log=True):
     :return:
     """
     if log:
-        print(f"Подключаюсь к {device['host']}...")
+        print(f"\nПодключаюсь к {device['host']}...:")
     with ConnectHandler(**device) as ssh:
         ssh.enable()
         result = ssh.send_config_set(commands)

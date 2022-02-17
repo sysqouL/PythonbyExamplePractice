@@ -1,0 +1,12 @@
+- device_type: huawei
+  host: 192.168.75.135
+  username: huawei
+  password: huawei
+- device_type: huawei
+  host: 192.168.75.134
+  username: huawei
+  password: huawei
+- device_type: huawei
+  host: 192.168.75.133
+  username: huawei
+  password: huawei

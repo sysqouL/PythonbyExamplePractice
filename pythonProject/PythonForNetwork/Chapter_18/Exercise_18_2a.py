@@ -19,6 +19,7 @@ def send_config_commands(device, commands, log=True):
     """
     :param device: словарь с параметрами подключения
     :param config_commands: список команд для выполнения
+    :param log: информация о том к какому устройству выполняется подключение
     :return:
     """
     if log:

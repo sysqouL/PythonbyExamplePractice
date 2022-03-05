@@ -1,0 +1,194 @@
+<R3>disp curr
+
+[V200R003C00]
+#
+ sysname R3
+#
+ snmp-agent local-engineid 800007DB03000000000000
+ snmp-agent 
+#
+ clock timezone China-Standard-Time minus 08:00:00
+#
+portal local-server load flash:/portalpage.zip
+#
+ drop illegal-mac alarm
+#
+ wlan ac-global carrier id other ac id 0
+#
+ set cpu-usage threshold 80 restore 75
+#
+dhcp enable
+#
+aaa 
+ authentication-scheme default
+ authorization-scheme default
+ accounting-scheme default
+ domain default 
+ domain default_admin 
+ local-user admin password cipher %$%$K8m.Nt84DZ}e#<0`8bmE3Uw}%$%$
+ local-user admin service-type http
+ local-user huawei password cipher %$%$N_r(1]/K/=fd">Xs8Eu>)wa&%$%$
+ local-user huawei privilege level 15
+ local-user huawei service-type telnet ssh
+#
+firewall zone Local
+ priority 15
+#
+interface GigabitEthernet0/0/0
+ ip address dhcp-alloc
+#
+interface GigabitEthernet0/0/1
+#
+interface GigabitEthernet0/0/2
+#
+interface NULL0
+#
+ stelnet server enable 
+#
+user-interface con 0
+ authentication-mode password
+user-interface vty 0 4
+ authentication-mode aaa
+ user privilege level 15
+ idle-timeout 30 0
+ protocol inbound all
+user-interface vty 16 20
+#
+wlan ac
+#
+return
+<R2>disp curr
+
+[V200R003C00]
+#
+ sysname R2
+#
+ snmp-agent local-engineid 800007DB03000000000000
+ snmp-agent 
+#
+ clock timezone China-Standard-Time minus 08:00:00
+#
+portal local-server load flash:/portalpage.zip
+#
+ drop illegal-mac alarm
+#
+ wlan ac-global carrier id other ac id 0
+#
+ set cpu-usage threshold 80 restore 75
+#
+dhcp enable
+#
+aaa 
+ authentication-scheme default
+ authorization-scheme default
+ accounting-scheme default
+ domain default 
+ domain default_admin 
+ local-user admin password cipher %$%$K8m.Nt84DZ}e#<0`8bmE3Uw}%$%$
+ local-user admin service-type http
+ local-user huawei password cipher %$%$[_NFKs+M>*NLHaQ<m~'F*jD1%$%$
+ local-user huawei privilege level 15
+ local-user huawei service-type telnet ssh
+#
+firewall zone Local
+ priority 15
+#
+interface GigabitEthernet0/0/0
+ ip address dhcp-alloc
+#
+interface GigabitEthernet0/0/1
+#
+interface GigabitEthernet0/0/2
+#
+interface NULL0
+#
+ stelnet server enable 
+#
+user-interface con 0
+ authentication-mode password
+user-interface vty 0 4
+ authentication-mode aaa
+ user privilege level 15
+ idle-timeout 30 0
+ protocol inbound all
+user-interface vty 16 20
+#
+wlan ac
+#
+return
+<R1>disp curr
+
+[V200R003C00]
+#
+ sysname R1
+#
+ snmp-agent local-engineid 800007DB03000000000000
+ snmp-agent 
+#
+ clock timezone China-Standard-Time minus 08:00:00
+#
+portal local-server load flash:/portalpage.zip
+#
+ drop illegal-mac alarm
+#
+ wlan ac-global carrier id other ac id 0
+#
+ set cpu-usage threshold 80 restore 75
+#
+dhcp enable
+#
+aaa 
+ authentication-scheme default
+ authorization-scheme default
+ accounting-scheme default
+ domain default 
+ domain default_admin 
+ local-user admin password cipher %$%$K8m.Nt84DZ}e#<0`8bmE3Uw}%$%$
+ local-user admin service-type http
+ local-user huawei password cipher %$%$VWHp(#KFc<[VGnF'1Fz-*PT_%$%$
+ local-user huawei privilege level 15
+ local-user huawei service-type telnet ssh
+#
+firewall zone Local
+ priority 15
+#
+interface Vlanif1
+#
+interface Ethernet0/0/0
+#
+interface Ethernet0/0/1
+#
+interface Ethernet0/0/2
+#
+interface Ethernet0/0/3
+#
+interface Ethernet0/0/4
+#
+interface Ethernet0/0/5
+#
+interface Ethernet0/0/6
+#
+interface Ethernet0/0/7
+#
+interface GigabitEthernet0/0/0
+ ip address dhcp-alloc
+#
+interface GigabitEthernet0/0/1
+ ip address dhcp-alloc
+#
+interface NULL0
+#
+ stelnet server enable 
+#
+user-interface con 0
+ authentication-mode password
+user-interface vty 0 4
+ authentication-mode aaa
+ user privilege level 15
+ idle-timeout 30 0
+ protocol inbound all
+user-interface vty 16 20
+#
+wlan ac
+#
+return

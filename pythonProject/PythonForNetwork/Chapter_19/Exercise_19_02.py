@@ -25,12 +25,14 @@ def send_show_command(device, command):
     with ConnectHandler(**device) as ssh:
         ssh.enable()
         result = ssh.send_command(command)
+        # find_prompt - возвращает текущее приглашение устройства
         prompt = ssh.find_prompt()
     return f"{prompt}{command}\n{result}\n"
 
 
 def send_show_command_to_devices(devices, command, filename, limit=3):
     with ThreadPoolExecutor(max_workers=limit) as executor:
+        # map применяет функцию send_show_command к разным устройствам из devices с повторение комманды через repeat
         results = executor.map(send_show_command, devices, repeat(command))
         with open(filename, "w") as f:
             for output in results:

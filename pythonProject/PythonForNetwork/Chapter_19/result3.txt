@@ -1,0 +1,85 @@
+<R3>disp ver
+Huawei Versatile Routing Platform Software
+VRP (R) software, Version 5.130 (AR2200 V200R003C00)
+Copyright (C) 2011-2012 HUAWEI TECH CO., LTD
+Huawei AR2220 Router uptime is 0 week, 0 day, 3 hours, 31 minutes
+BKP 0 version information: 
+1. PCB      Version  : AR01BAK2A VER.NC
+2. If Supporting PoE : No
+3. Board    Type     : AR2220
+4. MPU Slot Quantity : 1
+5. LPU Slot Quantity : 6
+
+MPU 0(Master) : uptime is 0 week, 0 day, 3 hours, 31 minutes
+MPU version information : 
+1. PCB      Version  : AR01SRU2A VER.A
+2. MAB      Version  : 0
+3. Board    Type     : AR2220
+4. BootROM  Version  : 0
+
+<R1>disp ip int br
+*down: administratively down
+^down: standby
+(l): loopback
+(s): spoofing
+The number of interface that is UP in Physical is 2
+The number of interface that is DOWN in Physical is 2
+The number of interface that is UP in Protocol is 2
+The number of interface that is DOWN in Protocol is 2
+
+Interface                         IP Address/Mask      Physical   Protocol  
+GigabitEthernet0/0/0              192.168.75.133/24    up         up        
+GigabitEthernet0/0/1              unassigned           down       down      
+NULL0                             unassigned           up         up(s)     
+Vlanif1                           unassigned           down       down      
+<R1>disp ip int desc
+Codes:
+      Ana(Analogmodem),       Asy(Async),             Cell(Cellular),
+      Dia(Dialer),            Eth(Ethernet)           GE(GigabitEthernet),
+      H(Hssi),                Ima(Ima-group),         Loop(LoopBack),
+      MTun(MTunnel),          S(Serial),              Tun(Tunnel),
+      VE(Virtual-Ethernet),   VT(Virtual-Template)
+
+      d(dampened),            D(down),                *D(administratively down),
+      ^D(standby),            l(loopback),            s(spoofing),
+      U(up)
+------------------------------------------------------------------------------ 
+Number of interfaces whose physical status is Up: 2
+Number of interfaces whose physical status is Down: 2
+Number of interfaces whose protocol status is Up: 2
+Number of interfaces whose protocol status is Down: 2
+
+Interface                      IP Address/Mask    Phy  Prot Description        
+GE0/0/0                        192.168.75.133/24  U    U                       
+GE0/0/1                        unassigned         D    D                       
+NULL0                          unassigned         U    U(s)                    
+Vlanif1                        unassigned         D    D                       
+<R2>disp int desc
+PHY: Physical
+*down: administratively down
+(l): loopback
+(s): spoofing
+(b): BFD down
+^down: standby
+(e): ETHOAM down
+(d): Dampening Suppressed
+Interface                     PHY     Protocol Description            
+GE0/0/0                       up      up       HUAWEI, AR Series, GigabitEtherne
+                                               t0/0/0 Interface       
+GE0/0/1                       down    down     HUAWEI, AR Series, GigabitEtherne
+                                               t0/0/1 Interface       
+GE0/0/2                       down    down     HUAWEI, AR Series, GigabitEtherne
+                                               t0/0/2 Interface       
+NULL0                         up      up(s)    HUAWEI, AR Series, NULL0 Interfac
+                                               e                      
+<R2>disp int count inb
+
+Interface            Total        UniCast      MultiCast      BroadCast      Err
+                    (pkts)         (pkts)         (pkts)         (pkts)   (pkts)
+GE0/0/0               1644            512            847            285        0
+GE0/0/1                  0              0              0              0        0
+GE0/0/2                  0              0              0              0        0
+
+NOTICE
+  OverFlow :more than 14 decimal digits (8 digits for column "Err").
+        -- :not supported.

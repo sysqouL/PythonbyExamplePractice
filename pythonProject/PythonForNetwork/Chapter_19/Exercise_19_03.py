@@ -3,6 +3,7 @@
 """
 
 """
+    Задание 19.3
     Создать функцию send_command_to_devices, которая отправляет разные
     команды show на разные устройства в параллельных потоках, а затем записывает
     вывод команд в файл. Вывод с устройств в файле может быть в любом порядке.
@@ -40,6 +41,10 @@ def send_show_command(device, command):
 
 def send_command_to_devices(devices, commands_dict, filename, limit=3):
     with ThreadPoolExecutor(max_workers=limit) as executor:
+        # submit - запускает в потоке только 1 функцию
+        # можно запускать разные функции с разными несвязными аргументами
+        # возвращается спец объект Future, который представляет выполнение функции
+        # можно передавать ключевые аргументы, map - только позиционные
         futures = [
             executor.submit(send_show_command, device, commands_dict[device["host"]])
             for device in devices

@@ -57,6 +57,3 @@ def generate_trunk_config(intf_vlan_mapping, trunk_template, portsec=None):
             commands.extend(portsec)
         trunk_test[port] = commands
     return trunk_test
-
-
-#vlans_str = ",".join([str(vlan) for vlan in vlans])

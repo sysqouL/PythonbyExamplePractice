@@ -1,0 +1,137 @@
+------------------------------------------------------------------------------------------------------------
+    Jinja2 - язык шаблонов
+    Установка:  pip install jinja2
+    Главная идея - разделение данных и шаблона.
+    Пример шаблона:
+        hostname {{name}}
+        !
+        interface
+         description Management loopback
+         ip address 10.255.{{id}}.1 255.255.255.255
+        !
+        interface GigibitEthenet0/0
+         description LAN to {{name}} sw1 {{int}}
+         ip address {{ip}} 255.255.255.0
+        !
+        router ospf 10
+         router-id 10.255.{{id}}.1
+         auto-cost reference-bandwidth 10000
+         network 10.0.0.0 0.255.255.255 area 0
+-----------------------------------------------------------------------------------------------------------------
+    Переменные записываются в двойных фигурных скобках. Переменные заменяются нужными значениями.
+
+    Пример скрипта с генерацией файла на основе шаблона Jinja2:
+        from jinja2 import Environment, FileSystemLoader
+        import yaml
+
+        env = Environment(loader=FileSystemLoader("."), trim_blocks=True, lstrip_blocks=True)
+        templ = env.get_template("cfg_template.txt")
+
+        list = {"id": "11", "name": "Liverpool", "int": "Gi1/0/17", "ip": "10.1.1.10"}
+        print(templ.render(list))
+
+        FileSystemLoader - загрузчик для работы с файловой системой. В скобках указывается путь
+        Environment - класс для описания переменных окружения
+------------------------------------------------------------------------------------------------------------
+    Контроль символов whitespace
+    trim_blocks - удаляет первую пустую строку после блока конструкции, если его значение True
+    lstrip_blocks - контролирует будут ли удалятся пробелы и табы от начала строки до начала блока(до { )
+        {%+ блок %} - отключает lstrip_blocks
+        {%- блок %} - удаляет все whitespace символы
+
+    Переменные указываются в двойных фигурных скобках. Значения переменных подставляются на основе словаря,
+    который передается шаблону. Переменная может быть числом, строкой, списком, словарем. Внутри шаблона можно
+    обращаться к элементу по номеру или ключу:  {{ переменная[0] }} , {{ переменная['ключ'] }} или {{ переменная.ключ }}
+
+    Цикл for - {% for ... %} тело {% endfor %}. Нужно явно указывать завершение
+
+    if/elif/else - так же должны находится внутри {% %} с явным окончаним условия.
+    Пример шаблона с ответвлениями:
+        {% for intf, params in trunks.items() %}
+        interface {{ intf }}
+          {% if params.action == 'add' %}
+          switchport trunk allowed vlan add {{ params.vlans }}
+          {% elif params.action == 'delete' %}
+          switchport trunk allowed vlan {{ params.vlans }}
+          {% else %}
+          switchport trunk allowed vlan {{ params.vlans }}
+          {% endif %}
+        {% endfor %}
+
+    Фильтры - отделяются от переменной вертикальной чертой - | и могут содержать дополнительные аргументы
+        # default - фильтр позволяющий указать для переменной значение по умолчанию
+    Пример:
+        router ospf 1
+          auto-cost reference-bandwith {{ ref_bw | default(10000) }}
+    Если переменная ref_bw определена - то будет подставленно её значение, если нет то default. Значение пустой объект
+    определяется как значение переменной. Boolean=True отключает подстановку пустых переменных
+        # dictsort - позволяет сортировать словарь. По умолчанию сортировка выполняется по ключам. После сортировки
+    возвращается список кортежей. Сам фильтр ожидает словарь.
+    dictsort(value, case_sensetive=False, by='key')
+        # join - работает так же как и метод - объединяет элементы последовательности в встроку с опциональным разделителем
+------------------------------------------------------------------------------------------------------------
+    Jinja поддерживает тесты, позволяющие проверять переменные на условия.
+        # defined - прповеряет есть ли переменная в словаре:
+          router ospf 1
+          {% if ref_bw is defind %}
+           auto-cost reference-bandwith {{ ref_bw }}
+          {% else %}
+           auto-cost reference-bandwith 10000
+
+        # iterable - проверяет, является ли объект итератором, с целью использования ответвлений учитывающих тип переменной:
+            {% if params.vlans is iterable %}
+
+        # set - позволяет присваивать значения переменным внутри шаблона. Это могут быть новые перменные или изменение старых
+        значений.
+            {% for intf, params in trunks | dictsort %}
+             {% set vlans = params.vlans %}
+             {% set action = params.action %}
+
+        # include - позволяет добавить один шаблон в другой. Переменные, которые передаются как данные, должны содержать
+        все данные и для основного шаблона, и для того, который добавлен через include.
+            Шаблон templates/vlans.txt:
+                {% for vlan, name in vlans.items() %}
+                vlan {{ vlan }}
+                 name {{ name }}
+                {% endfor %}
+            Шаблон templates/ospf.txt:
+                router ospf 1
+                 auto-cost reference-bandwidth 10000
+                {% for networks in ospf %}
+                 network {{ networks.network }} area {{ networks.area }}
+                {% endfor %}
+            Шаблон templates/switch.txt использует созданные выше шаблоны:
+                {% include 'vlans.txt' %}
+
+                {% include 'ospf.txt' %}
+------------------------------------------------------------------------------------------------------------
+    Наследование шаблонов
+    Различают:
+        - Базовый шаблон - описывает каркас. Могут находится любые обычные выражения или текст. Определяются блоки
+        - Дочерний - для заполнения обозначенных блоков в базовом
+    Пример:
+        Базовый:
+            {% block services %}
+            service password-encryption
+            service sequence-numbers
+            {% endblock %}
+            !
+            ip ssh version 2
+            !
+            {% block ospf %}
+            router ospf 1
+             auto-cost reference-bandwidth 10000
+            {% endblock %}
+            !
+            {% blockbgp %}
+            {% endblock %}
+        Дочерний: - строки за пределами блоков игнорируюстя
+            {% extends "имя базового" %} - дочерний построен на основе базового
+
+            {% block ospf %}
+            {{ super() }} - переносит содержимое из родительского шаблона в дочерний
+            {% for networks in ospf %}
+             network {{ networks.network }} area {{ networks.area }}
+            {% endfor %}
+            {% endblock %}
+

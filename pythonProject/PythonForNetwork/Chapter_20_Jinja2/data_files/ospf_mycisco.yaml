@@ -1,0 +1,40 @@
+process: 55555
+router_id: 10.54.0.1
+log: -adjacency-changes
+passint: default
+timethrotspf: 10 100 200
+timethrotlsa: all 20 200 400 
+timelsaarriv: 30
+timepacflood: 40
+timepacretran: 60
+ospf_int:
+  - name: Gi0/1
+    ip: 10.54.1.1 
+    rm: 0.0.0.3
+    area: 0
+    message: message-digest
+    passive: False
+  - name: Fa0/1.100
+    ip: 10.54.2.1
+    rm: 0.0.0.3
+    area: 0
+    message: message-digest
+    passive: False
+  - name: Fa0/1.200
+    ip: 10.54.3.1
+    rm: 0.0.0.3
+    area: 0
+    message: message-digest
+    passive: False
+  - name: Fa0/0.10
+    ip: 10.54.10.1   
+    rm: 0.0.0.7
+    area: 2
+    message: message-digest
+    passive: True
+  - name: Fa0/0.20
+    ip: 10.54.20.1
+    rm: 0.0.0.7
+    area: 2
+    message: message-digest     
+    passive: True

@@ -1,0 +1,18 @@
+router ospf номер
+ router-id номер формата ip
+ log-adjacency-changes
+ area № authentication message-digest
+ timers throttle spf Число число число
+ timers throttle lsa all число число число
+ timers lsa arrival число
+ timers pacing flood число
+ timers pacing retransmission число
+ passive-interface default
+ no passive-interface имя
+ network IP обр.Mask area №
+ 
+!
+interface Имя
+ ip ospf network point-to-point
+ ip ospf hello-interval Число
+ ip ospf cost

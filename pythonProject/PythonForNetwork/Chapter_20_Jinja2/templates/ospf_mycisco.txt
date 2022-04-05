@@ -1,0 +1,26 @@
+router ospf {{ process }}
+ router-id {{ router_id }}
+ log{{ log }}
+{% for int in ospf_int %}
+ area {{ int.area }} authentication {{ int.message }}
+{% endfor %} 
+ passive-interface {{ passint }}
+ timers throttle spf {{ timethrotspf }}
+ timers throttle lsa {{ timethrotlsa }}
+ timers lsa arrival {{ timelsaarriv }}
+ timers pacing flood {{ timepacflood }}
+ timers pacing retransmission {{ timepacretran }} 
+{% for int in ospf_int %}
+ network {{ int.ip }} {{ int.rm }} area {{ int.area }}
+{% endfor %}
+{% for int in ospf_int if not int.passive %}
+ no passive-interface {{ int.name }}
+{% endfor %}
+
+
+{% for int in ospf_int if not int.passive %}
+interface {{ int.name }}
+ ip ospf network point-to-point
+ ip ospf hello-interval 30
+ ip ospf cost 20
+{% endfor %}

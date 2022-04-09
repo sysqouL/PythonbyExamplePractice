@@ -1,0 +1,31 @@
+vlans:
+ - vlan_id: 10
+   name: Marketing
+ - vlan_id: 20
+   name: Finance
+ - vlan_id: 100
+   name: Admins
+access:
+  - int: Fa0/1
+    vlan: 10  
+  - int: Fa0/2
+    vlan: 10
+  - int: Fa0/3
+    vlan: 10
+  - int: Fa0/4
+    vlan: 20
+  - int: Fa0/5
+    vlan: 20
+  - int: Fa0/6
+    vlan: 20
+  - int: Fa0/7
+    vlan: 100
+  - int: Fa0/8
+    vlan: 100
+trunk:
+  - int: Gi0/1
+    pvid: 10
+    vlans: 10, 20 
+  - int: Gi0/2
+    pvid: 20
+    vlans: 10,20,100

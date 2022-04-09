@@ -47,7 +47,7 @@ import yaml
 from Exercise_20_01 import generate_config
 
 if __name__ == "__main__":
-    template = "templates/add_vlan_to_switch.txt"
-    with open("data_files/add_vlan_to_switch.yaml") as f:
+    template = "templates/add_vlan_to_switch.txt"               # "templates/add_vlan_to_huawei.txt"
+    with open("data_files/add_vlan_to_switch.yaml") as f:       # "data_files/add_vlan_to_huawei.yaml"
         data = yaml.load(f, Loader=yaml.FullLoader)
     print(generate_config(template, data))

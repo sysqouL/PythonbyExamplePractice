@@ -1,0 +1,17 @@
+{% for vlan in vlans %}
+vlan {{ vlan.vlan_id }}
+ name {{ vlan.name }}
+{% endfor %}
+
+{% for inta in access %}
+interface {{ inta.int }}
+ port link-type access
+ port default vlan {{ inta.vlan }}
+{% endfor %}
+
+{% for intt in trunk %}
+interface {{ intt.int }}
+ port link-type trunk
+ port trunk pvid vlan {{ intt.pvid }}
+ port trunk allow-pass vlan {{ intt.vlans }} 
+{% endfor %}

@@ -1,0 +1,15 @@
+ospf № router-id IP vpn-instance ()
+ silent-interface (all)
+ undo silent-interface (int)
+ vpn-instance-capability (simple)
+ area 0.0.0.()
+  authentication-mode ()
+  network (ip)(rm)
+  stub (no-summary)
+
+
+
+
+interfaces
+ ospf network-type p2p
+ ospf cost ()

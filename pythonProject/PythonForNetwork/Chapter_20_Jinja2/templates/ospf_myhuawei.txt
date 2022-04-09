@@ -1,0 +1,21 @@
+ospf {{ process }} routerd-id {{ router_id }} vpn-instance {{ vpn_instance }}
+ silent-interface {{ silent_int }}
+ vpn-instance-capability {{ vpn_inst_cap }}
+{% for int in undo_silent_int %}
+ {% if int.silent == False %}
+ undo silent-interface {{ int.name }}
+ {% endif %}
+{% endfor %}
+ vpn-instance-capability {{ vpn_inst_cap }}  
+{% for area in ospf_area -%}
+ area {{ area.name }} 
+ authentication-mode {{ area.auth_mode }}
+ {% for networks in area['networks'] %}
+ {% for key,network in networks.items() %}
+ network {{ network }}
+ {% endfor %}
+ {% endfor %}
+{% if area.stub %}
+ stub {{ area.stub_state }}
+ {% endif %}
+{% endfor %}

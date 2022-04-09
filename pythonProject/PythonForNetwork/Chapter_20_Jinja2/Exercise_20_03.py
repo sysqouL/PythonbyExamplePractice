@@ -34,7 +34,7 @@ import yaml
 from Exercise_20_01 import generate_config
 
 if __name__ == "__main__":
-    with open("data_files/ospf.yaml") as f:                            # ospf_mycisco.yaml
+    with open("data_files/ospf.yaml") as f:                            # ospf_mycisco.yaml / ospf_myhuawei.yaml
         data = yaml.load(f, Loader=yaml.FullLoader)
-    print(generate_config("templates/ospf.txt", data))                 # ospf_mycisco.txt
+    print(generate_config("templates/ospf.txt", data))                 # ospf_mycisco.txt / ospf_myhuawei.txt
 

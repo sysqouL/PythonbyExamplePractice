@@ -1,0 +1,22 @@
+ipsec proposal {{ prop_name }}
+ esp authentication-algorithm sha1
+ esp encryption-algorithm 3desc
+
+ipsec policy PS1 10 manual
+ proposal {{ prop_name }}
+ tunnel remote {{ tun_remote }}
+ tunnel local {{ tun_local }}
+ sa spi outbound esp {{ out_esp }}
+ sa spi inbound esp {{ in_esp }}
+ sa strink-key outbound esp cipher
+ sa string-key inbound esp cipher
+
+int Serial0/0/1
+ ipsec policy PS1
+
+int Tunnel0/0/1
+ ip add 100.0.0.1
+ tunnel-protocol gre
+ source-ip {{ tun_local }}
+ destination {{tun_remote }}
+ keepalive period {{ kperiod }}

@@ -1,0 +1,23 @@
+ipsec proposal <Name>
+ esp authentication-algorithm <sha1>
+ esp encryption-algorithm <3des>
+
+ipsec policy <Name> <10> manual
+ security <acl 3001>
+ proposal <tran1>
+ tunnel remote <ip>
+ tunnel local <ip>
+ sa spi outbound esp <number>
+ sa spi inbound esp <number>
+ sa strink-key outbound esp <method>
+ sa string-key inbound esp <method>
+
+int <type>
+ ipsec policy <Name>
+
+int <Tunnel>
+ ip add <>
+ tunnel-protocol <gre>
+ source <ip>
+ destination <ip>
+ keepalive period <3>

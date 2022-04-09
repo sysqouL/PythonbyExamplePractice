@@ -25,3 +25,29 @@
     в файле data_files/add_vlan_to_switch.yaml, с помощью функции generate_config
     из задания 20.1.
 """
+
+"""
+# templates/add_vlan_to_switch.txt
+
+vlan {{ vlan_id }}
+ name {{ name }}
+{% for int in access %}
+interface {{ int }}
+ switchport mode access
+ switchport access vlan {{ vlan_id }}
+{% endfor %}
+{% for int in trunk %}
+interface {{ int }}
+ switchport trunk allowed vlan add {{ vlan_id }}
+{% endfor %}
+"""
+
+
+import yaml
+from Exercise_20_01 import generate_config
+
+if __name__ == "__main__":
+    template = "templates/add_vlan_to_switch.txt"
+    with open("data_files/add_vlan_to_switch.yaml") as f:
+        data = yaml.load(f, Loader=yaml.FullLoader)
+    print(generate_config(template, data))

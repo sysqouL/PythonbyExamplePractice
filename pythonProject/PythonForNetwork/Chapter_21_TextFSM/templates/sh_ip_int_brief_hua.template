@@ -1,0 +1,7 @@
+Value intf (\S+)
+Value address (\S+)
+Value status (up|down|.down)
+Value protocol (up\S+|down|up)
+
+Start
+  ^${intf}\s+${address}\s+${status}\s+${protocol} -> Record

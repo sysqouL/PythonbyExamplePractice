@@ -1,0 +1,12 @@
+<S5731>disp ip int br
+*down: administratively down
+^down: standby
+(l): loopback
+(s): spoofing
+(E): E-Trunk down
+
+Interface		IP Address/Mask		Physical	Protocol
+Meth0/0/1		192.168.175.20/24	down		down	
+NULL0			unnasigned		up		up(s)
+Vlanif1			10.54.50.100/28		*down		down
+Vlanif699		10.50.45.28/28		up		up	

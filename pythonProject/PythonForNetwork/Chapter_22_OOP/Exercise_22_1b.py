@@ -88,11 +88,13 @@ if __name__ == "__main__":
         print()
         delete = input("Удалить линк ?(Да/Нет): ")
         if delete.lower() == "да":
-            link_from = input("Введите порт источника: ")
-            link_to = input("Введите порт назначения: ")
+            link_from = input("Имя устройства источника: "),input("Порт устройства источника: "),
+            link_to = input("Имя устройства назначения: "),input("Порт устройства назначения: "),
             print()
-            print(top.delete_link(link_from, link_to))
+            print("Удалямая запись топологии:",link_from,',',link_to)
+            top.delete_link(link_from, link_to)
             print("Топология сети после удаления: ")
             pprint(top.topology)
+        else:
+            print("Bye")
             break
-        else: break

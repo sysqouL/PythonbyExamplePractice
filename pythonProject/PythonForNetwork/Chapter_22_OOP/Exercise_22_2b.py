@@ -70,7 +70,7 @@ class CiscoTelnet:
     def send_config_commands(self, commands):
         if isinstance(commands, str):
             commands = [commands]
-        commands = ["system-view", *commands, "quit"]
+        commands = ["system-view ", *commands, "return"]
         for command in commands:
             self._write_line(command)
             time.sleep(1)
@@ -87,7 +87,7 @@ if __name__ == "__main__":
     with_parse = r1.send_show_command("disp ip int br")
     no_parse = r1.send_show_command("disp ip int br", parse=False)
     list_commands = r1.send_config_commands(
-            ["interface Loop1", "ip address 1.1.1.1 255.255.255.254"])
+            ["interface Loop1", "ip address 1.1.1.1 255.255.255.255"])
     pprint(with_parse)
     print()
     pprint(no_parse)

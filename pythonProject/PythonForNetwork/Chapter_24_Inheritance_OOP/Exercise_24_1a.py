@@ -32,7 +32,7 @@
 
 from base_class_and_note import BaseSSH
 
-class CiscoSSH(BaseSSH)
+class CiscoSSH(BaseSSH):
     def __init__(self, **device_params):
         params = {
             "username": "Введите имя пользователя: ",
